@@ -1,0 +1,4 @@
+executable(
+  'cursor',
+  'cursor.c'
+)

@@ -6,7 +6,7 @@ endif
 
 CLEANFILES =
 DISTCLEANFILES =
-EXTRA_DIST =
+EXTRA_DIST = meson.build
 
 # VAPI
 

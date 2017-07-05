@@ -9,6 +9,7 @@ icons = \
 	$(NULL)
 
 EXTRA_DIST = \
+	meson.build \
 	$(icons) \
 	$(NULL)
 

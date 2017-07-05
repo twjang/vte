@@ -1,6 +1,6 @@
 CLEANFILES =
 DISTCLEANFILES =
-EXTRA_DIST =
+EXTRA_DIST = meson.build
 
 INTROSPECTION_GIRS = Vte-$(VTE_API_VERSION).gir
 INTROSPECTION_SCANNER_ARGS = --add-include-path=$(srcdir) --warn-all

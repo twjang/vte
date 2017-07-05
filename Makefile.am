@@ -8,6 +8,9 @@ EXTRA_DIST = \
 	HACKING \
 	autogen.sh \
 	ChangeLog.pre-git \
+	meson.build \
+	meson_options.txt \
+	po/meson.build \
 	$(NULL)
 
 DISTCLEANFILES =

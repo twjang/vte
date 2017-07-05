@@ -4,7 +4,10 @@ noinst_PROGRAMS = testvte
 CLEANFILES =
 DISTCLEANFILES =
 MAINTAINERCLEANFILES =
-EXTRA_DIST =
+EXTRA_DIST = \
+	meson.build \
+	vte/meson.build \
+	$(NULL)
 
 # The library
 

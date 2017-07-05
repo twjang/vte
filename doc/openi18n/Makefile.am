@@ -1,4 +1,4 @@
-EXTRA_DIST = UTF-8.txt  wrap.txt
+EXTRA_DIST = UTF-8.txt  wrap.txt meson.build
 
 LIBS=
 noinst_PROGRAMS = cursor

@@ -8953,7 +8953,7 @@ Terminal::draw_rows(VteScreen *screen_,
         // FIXME find a nicer place for these
         m_ringview.set_ring (m_screen->row_data);
         m_ringview.set_rows ((long) m_screen->scroll_delta, m_row_count + 3);
-        m_ringview.set_width (m_column_count);
+        m_ringview.set_width (column_count);
         m_ringview.update ();
 
 
@@ -9095,7 +9095,13 @@ Terminal::draw_rows(VteScreen *screen_,
                         hilite = nhilite;
 
                         g_assert_cmpint (item_count, <, column_count);
-                        items[item_count].c = cell->c;
+
+                        // FIXME apply combining accents on top of the shaped character
+                        gunichar shaped_char = bidirow->vis_get_shaped_char(col);
+                        if (shaped_char == 0)
+                                shaped_char = cell->c;
+
+                        items[item_count].c = shaped_char;
                         items[item_count].columns = cell->attr.columns();
                         items[item_count].x = (col - (bidirow->vis_is_rtl(col) ? cell->attr.columns() - 1 : 0)) * column_width;
                         items[item_count].y = y;
@@ -9245,7 +9251,7 @@ Terminal::paint_cursor()
 
 	/* Draw the cursor. */
         viscol = bidirow->log2vis(col);
-	item.c = (cell && cell->c) ? cell->c : ' ';
+	item.c = (cell && cell->c) ? cell->c : ' ';  // FIXME replace with shaped character
 	item.columns = item.c == '\t' ? 1 : cell ? cell->attr.columns() : 1;
         item.x = (viscol - ((cell && bidirow->vis_is_rtl(viscol)) ? cell->attr.columns() - 1 : 0)) * width;
 	item.y = row_to_pixel(drow);

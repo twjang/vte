@@ -10,6 +10,7 @@ Done:
 - Mouse reporting.
 - Regex match and explicit hyperlink underlining on hover.
 - VTE_DEBUG=bidi highlights characters with resolved RTL directionality.
+- Arabic shaping using Unicode presentation forms.
 - Test file.
 - Configure flag.
 
@@ -18,6 +19,7 @@ Bugs:
 - The way the modes apply to paragraphs, and what happens when a paragraph
   is split or two paragraphs are joined is just a first hack, needs to be
   reviewed, adjusted, fixed properly.
+- Arabic shaping vs. extras (linewrap, cursor, combining accents).
 
 Missing from first release:
 - The entire screen is always invalidated. Have some more fine grained
@@ -30,7 +32,7 @@ Missing from first release:
 - Code cleanup and review, of course.
 
 Planned future improvements:
-- Shaping.
+- Real shaping (harfbuzz?).
 - Right-align RTL glyphs.
 - Implicit mode level 2 (handling BiDi control characters).
 - Mirror the glyphs that don't have mirrored counterpart.

@@ -376,7 +376,23 @@ vte::grid::row_t RingView::paragraph(vte::grid::row_t row)
                 return explicit_paragraph (row_orig, rtl);
         }
 
-        // FIXME make these per-row?
+        /* Arabic shaping
+         *
+         * https://www.w3.org/TR/css-text-3/#word-break-shaping says:
+         * "When shaping scripts such as Arabic wrap [...] the characters must still be shaped (their joining forms chosen)
+         * as if the word were still whole."
+         *
+         * Also, FriBidi's Arabic shaping methods, as opposed to fribidi_reorder_line(), don't take an offset parameter.
+         * This is another weak sign that the desired behavior is to shape the entire paragraph before splitting to lines.
+         *
+         * We only perform shaping in implicit mode, for two reasons:
+         *
+         * Following the CSS logic, I think the sensible behavior for a partially visible word (e.g. at the margin of a
+         * text editor) is to use the joining/shaping form according to the entire word. Hence in explicit mode it must be
+         * the responsibility of the BiDi-aware application and not the terminal emulator to perform joining/shaping.
+         *
+         * And a technical limitation: FriBidi can only perform joining/shaping with the logical order as input, not with
+         * the visual order. We'd need to find another API, or do ugly workarounds, which I'd rather not. */
         fribidi_join_arabic (fribidi_chartypes, count, fribidi_levels, fribidi_joiningtypes);
         fribidi_shape_arabic (FRIBIDI_FLAGS_ARABIC, fribidi_levels, count, fribidi_joiningtypes, fribidi_chars);
 
